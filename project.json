@@ -4,7 +4,11 @@
   "description": "Abbot invoice extract tariff code info",
   "main": "Main.xaml",
   "dependencies": {
-    "UiPath.System.Activities": "[24.10.7]"
+    "Microsoft.Omex.Extensions.Activities": "[20.0.5]",
+    "UiPath.DocumentUnderstanding.Activities": "[2.13.2-preview]",
+    "UiPath.Excel.Activities": "[2.25.1-preview]",
+    "UiPath.System.Activities": "[24.10.7]",
+    "UiPath.UIAutomation.Activities": "[25.2.1-preview]"
   },
   "webServices": [],
   "entitiesStores": [],
