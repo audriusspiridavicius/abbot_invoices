@@ -2,6 +2,11 @@
   <x:Members>
     <x:Property Name="in_InvoicesData" Type="InArgument(scg:Dictionary(x:String, scg:Dictionary(x:String, x:Decimal)))" />
     <x:Property Name="in_AdditionalInvoiceData" Type="InArgument(scg:Dictionary(x:String, x:String))" />
+    <x:Property Name="in_result_file_location_fullname" Type="InArgument(x:String)">
+      <x:Property.Attributes>
+        <RequiredArgumentAttribute />
+      </x:Property.Attributes>
+    </x:Property>
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -99,56 +104,55 @@
       <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
       <AssemblyReference>System.Private.Xml</AssemblyReference>
       <AssemblyReference>UiPath.IntelligentOCR.StudioWeb.Activities</AssemblyReference>
+      <AssemblyReference>System.Linq.Parallel</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Linq.Queryable</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="SaveDataToExcel" sap:VirtualizedContainerService.HintSize="1520,3989" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="SaveDataToExcel" sap:VirtualizedContainerService.HintSize="1520,4989" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Sequence sap:VirtualizedContainerService.HintSize="676,3966" sap2010:WorkflowViewState.IdRef="Sequence_2">
+    <Sequence sap:VirtualizedContainerService.HintSize="712,4966" sap2010:WorkflowViewState.IdRef="Sequence_2">
       <Sequence.Variables>
-        <Variable x:TypeArguments="x:Int32" Name="NextAvailableRow">
-          <Variable.Default>
-            <Literal x:TypeArguments="x:Int32" Value="1" />
-          </Variable.Default>
-        </Variable>
+        <Variable x:TypeArguments="x:Int32" Default="1" Name="NextAvailableRow" />
       </Sequence.Variables>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ueab:ExcelProcessScopeX DisplayAlerts="{x:Null}" ExistingProcessAction="{x:Null}" FileConflictResolution="{x:Null}" LaunchMethod="{x:Null}" LaunchTimeout="{x:Null}" MacroSettings="{x:Null}" ProcessMode="{x:Null}" DisplayName="Excel Process Scope" sap:VirtualizedContainerService.HintSize="642,3883" sap2010:WorkflowViewState.IdRef="ExcelProcessScopeX_1" ShowExcelWindow="True">
+      <ueab:ExcelProcessScopeX DisplayAlerts="{x:Null}" ExistingProcessAction="{x:Null}" FileConflictResolution="{x:Null}" LaunchMethod="{x:Null}" LaunchTimeout="{x:Null}" MacroSettings="{x:Null}" ProcessMode="{x:Null}" DisplayName="Excel Process Scope" sap:VirtualizedContainerService.HintSize="678,4883" sap2010:WorkflowViewState.IdRef="ExcelProcessScopeX_1" ShowExcelWindow="True">
         <ueab:ExcelProcessScopeX.Body>
           <ActivityAction x:TypeArguments="ui:IExcelProcess">
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="ui:IExcelProcess" Name="ExcelProcessScopeTag" />
             </ActivityAction.Argument>
-            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="608,3773" sap2010:WorkflowViewState.IdRef="Sequence_4">
+            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="644,4773" sap2010:WorkflowViewState.IdRef="Sequence_4">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <ueab:ExcelApplicationCard Password="{x:Null}" ReadFormatting="{x:Null}" SensitivityLabel="{x:Null}" DisplayName="Use Excel File" sap:VirtualizedContainerService.HintSize="574,3713" sap2010:WorkflowViewState.IdRef="ExcelApplicationCard_1" ResizeWindow="None" SensitivityOperation="None" WorkbookPath="E:\uipath\abbot invoice\Abbot_Invoice\invoices\test_excel">
+              <ueab:ExcelApplicationCard Password="{x:Null}" ReadFormatting="{x:Null}" SensitivityLabel="{x:Null}" DisplayName="Use Excel File" sap:VirtualizedContainerService.HintSize="610,4713" sap2010:WorkflowViewState.IdRef="ExcelApplicationCard_1" ResizeWindow="None" SensitivityOperation="None" WorkbookPath="[in_result_file_location_fullname]">
                 <ueab:ExcelApplicationCard.Body>
                   <ActivityAction x:TypeArguments="ue:IWorkbookQuickHandle">
                     <ActivityAction.Argument>
                       <DelegateInArgument x:TypeArguments="ue:IWorkbookQuickHandle" Name="Excel" />
                     </ActivityAction.Argument>
-                    <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="540,3421" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                    <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="576,4421" sap2010:WorkflowViewState.IdRef="Sequence_3">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <ueab:WriteCellX Cell="[Excel.Sheet(&quot;Sheet1&quot;).Cell(&quot;A1&quot;)]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="506,191" sap2010:WorkflowViewState.IdRef="WriteCellX_4" Value="[&quot;Invoice number&quot;]" />
-                      <ueab:WriteCellX Cell="[Excel.Sheet(&quot;Sheet1&quot;).Cell(&quot;B1&quot;)]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="506,191" sap2010:WorkflowViewState.IdRef="WriteCellX_5" Value="[&quot;Date&quot;]" />
-                      <ueab:WriteCellX Cell="[Excel.Sheet(&quot;Sheet1&quot;).Cell(&quot;C1&quot;)]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="506,191" sap2010:WorkflowViewState.IdRef="WriteCellX_9" Value="[&quot;weight&quot;]" />
-                      <ueab:WriteCellX Cell="[Excel.Sheet(&quot;Sheet1&quot;).Cell(&quot;D1&quot;)]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="506,191" sap2010:WorkflowViewState.IdRef="WriteCellX_10" Value="[&quot;Price&quot;]" />
-                      <Assign sap:VirtualizedContainerService.HintSize="506,114" sap2010:WorkflowViewState.IdRef="Assign_1">
+                      <ueab:WriteCellX Cell="[Excel.Sheet(&quot;Sheet1&quot;).Cell(&quot;A1&quot;)]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="542,191" sap2010:WorkflowViewState.IdRef="WriteCellX_4" Value="[&quot;Invoice number&quot;]" />
+                      <ueab:WriteCellX Cell="[Excel.Sheet(&quot;Sheet1&quot;).Cell(&quot;B1&quot;)]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="542,191" sap2010:WorkflowViewState.IdRef="WriteCellX_5" Value="[&quot;Date&quot;]" />
+                      <ueab:WriteCellX Cell="[Excel.Sheet(&quot;Sheet1&quot;).Cell(&quot;C1&quot;)]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="542,191" sap2010:WorkflowViewState.IdRef="WriteCellX_9" Value="[&quot;weight&quot;]" />
+                      <ueab:WriteCellX Cell="[Excel.Sheet(&quot;Sheet1&quot;).Cell(&quot;D1&quot;)]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="542,191" sap2010:WorkflowViewState.IdRef="WriteCellX_10" Value="[&quot;Price&quot;]" />
+                      <Assign sap:VirtualizedContainerService.HintSize="542,114" sap2010:WorkflowViewState.IdRef="Assign_1">
                         <Assign.To>
                           <OutArgument x:TypeArguments="x:Int32">[NextAvailableRow]</OutArgument>
                         </Assign.To>
@@ -156,13 +160,13 @@
                           <InArgument x:TypeArguments="x:Int32">[NextAvailableRow + 1]</InArgument>
                         </Assign.Value>
                       </Assign>
-                      <ui:ForEach x:TypeArguments="scg:KeyValuePair(x:String, scg:Dictionary(x:String, x:Decimal))" CurrentIndex="{x:Null}" DisplayName="For Each invoice" sap:VirtualizedContainerService.HintSize="506,2483" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[in_InvoicesData]">
+                      <ui:ForEach x:TypeArguments="scg:KeyValuePair(x:String, scg:Dictionary(x:String, x:Decimal))" CurrentIndex="{x:Null}" DisplayName="For Each invoice" sap:VirtualizedContainerService.HintSize="542,3483" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[in_InvoicesData]">
                         <ui:ForEach.Body>
                           <ActivityAction x:TypeArguments="scg:KeyValuePair(x:String, scg:Dictionary(x:String, x:Decimal))">
                             <ActivityAction.Argument>
                               <DelegateInArgument x:TypeArguments="scg:KeyValuePair(x:String, scg:Dictionary(x:String, x:Decimal))" Name="invoice" />
                             </ActivityAction.Argument>
-                            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="504,2362" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="540,3362" sap2010:WorkflowViewState.IdRef="Sequence_6">
                               <Sequence.Variables>
                                 <Variable x:TypeArguments="x:Int32" Name="startLine" />
                               </Sequence.Variables>
@@ -171,9 +175,21 @@
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
-                              <ueab:WriteCellX AutoIncrementRow="True" Cell="[Excel.Sheet(&quot;Sheet1&quot;).Cell(&quot;A&quot;+NextAvailableRow.ToString)]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="470,191" sap2010:WorkflowViewState.IdRef="WriteCellX_3" Value="[invoice.Key]" />
-                              <ueab:WriteCellX Cell="[Excel.Sheet(&quot;Sheet1&quot;).Cell(&quot;B&quot;+NextAvailableRow.ToString)]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="470,191" sap2010:WorkflowViewState.IdRef="WriteCellX_6" Value="[in_AdditionalInvoiceData(invoice.Key + &quot;_date&quot;)]" />
-                              <Assign sap:VirtualizedContainerService.HintSize="470,114" sap2010:WorkflowViewState.IdRef="Assign_2">
+                              <ueab:WriteCellX sap2010:Annotation.AnnotationText="write invoice number" AutoIncrementRow="True" Cell="[Excel.Sheet(&quot;Sheet1&quot;).Cell(&quot;A&quot;+NextAvailableRow.ToString)]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="506,222" sap2010:WorkflowViewState.IdRef="WriteCellX_3" Value="[invoice.Key]">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                              </ueab:WriteCellX>
+                              <ueab:WriteCellX sap2010:Annotation.AnnotationText="write invoice date" Cell="[Excel.Sheet(&quot;Sheet1&quot;).Cell(&quot;B&quot;+NextAvailableRow.ToString)]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="506,222" sap2010:WorkflowViewState.IdRef="WriteCellX_6" Value="[in_AdditionalInvoiceData(invoice.Key + &quot;_date&quot;)]">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                              </ueab:WriteCellX>
+                              <Assign sap:VirtualizedContainerService.HintSize="506,114" sap2010:WorkflowViewState.IdRef="Assign_2">
                                 <Assign.To>
                                   <OutArgument x:TypeArguments="x:Int32">[NextAvailableRow]</OutArgument>
                                 </Assign.To>
@@ -181,7 +197,7 @@
                                   <InArgument x:TypeArguments="x:Int32">[NextAvailableRow + 2]</InArgument>
                                 </Assign.Value>
                               </Assign>
-                              <Assign sap:VirtualizedContainerService.HintSize="470,114" sap2010:WorkflowViewState.IdRef="Assign_5">
+                              <Assign sap:VirtualizedContainerService.HintSize="506,114" sap2010:WorkflowViewState.IdRef="Assign_5">
                                 <Assign.To>
                                   <OutArgument x:TypeArguments="x:Int32">[startLine]</OutArgument>
                                 </Assign.To>
@@ -189,61 +205,111 @@
                                   <InArgument x:TypeArguments="x:Int32">[NextAvailableRow]</InArgument>
                                 </Assign.Value>
                               </Assign>
-                              <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="For Each TariffCode" sap:VirtualizedContainerService.HintSize="470,941" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[invoice.Value.Keys]">
-                                <ui:ForEach.Body>
-                                  <ActivityAction x:TypeArguments="x:Object">
-                                    <ActivityAction.Argument>
-                                      <DelegateInArgument x:TypeArguments="x:Object" Name="TariffCode" />
-                                    </ActivityAction.Argument>
-                                    <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="468,811" sap2010:WorkflowViewState.IdRef="Sequence_7">
-                                      <sap:WorkflowViewStateService.ViewState>
-                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                        </scg:Dictionary>
-                                      </sap:WorkflowViewStateService.ViewState>
-                                      <ueab:WriteCellX Cell="[Excel.Sheet(&quot;Sheet1&quot;).Cell(&quot;B&quot;+NextAvailableRow.ToString)]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="434,191" sap2010:WorkflowViewState.IdRef="WriteCellX_7" Value="[TariffCode]" />
-                                      <ueab:WriteCellX sap2010:Annotation.AnnotationText="write product weight 0 for all products C Column" Cell="[Excel.Sheet(&quot;Sheet1&quot;).Cell(&quot;C&quot;+NextAvailableRow.ToString)]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="434,222" sap2010:WorkflowViewState.IdRef="WriteCellX_11" Value="[0]">
-                                        <sap:WorkflowViewStateService.ViewState>
-                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-                                          </scg:Dictionary>
-                                        </sap:WorkflowViewStateService.ViewState>
-                                      </ueab:WriteCellX>
-                                      <ueab:WriteCellX sap2010:Annotation.AnnotationText="write product price D column&#xD;&#xA;" AutoIncrementRow="True" Cell="[Excel.Sheet(&quot;Sheet1&quot;).Cell(&quot;D&quot;+NextAvailableRow.ToString)]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="434,233" sap2010:WorkflowViewState.IdRef="WriteCellX_8" Value="[invoice.Value(CStr(TariffCode))]">
-                                        <sap:WorkflowViewStateService.ViewState>
-                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-                                          </scg:Dictionary>
-                                        </sap:WorkflowViewStateService.ViewState>
-                                      </ueab:WriteCellX>
-                                      <Assign sap:VirtualizedContainerService.HintSize="434,105" sap2010:WorkflowViewState.IdRef="Assign_3">
-                                        <Assign.To>
-                                          <OutArgument x:TypeArguments="x:Int32">[NextAvailableRow]</OutArgument>
-                                        </Assign.To>
-                                        <Assign.Value>
-                                          <InArgument x:TypeArguments="x:Int32">[NextAvailableRow + 1]</InArgument>
-                                        </Assign.Value>
-                                      </Assign>
-                                    </Sequence>
-                                  </ActivityAction>
-                                </ui:ForEach.Body>
-                              </ui:ForEach>
-                              <ueab:WriteCellX Cell="[Excel.Sheet(&quot;Sheet1&quot;).Cell(&quot;B&quot;+NextAvailableRow.ToString)]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="470,191" sap2010:WorkflowViewState.IdRef="WriteCellX_13" Value="[&quot;Totals&quot;]" />
-                              <ueab:WriteCellX sap2010:Annotation.AnnotationText="write formula that calculate total weight of invoice &#xD;&#xA;" Cell="[Excel.Sheet(&quot;Sheet1&quot;).Cell(&quot;C&quot;+NextAvailableRow.ToString)]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="470,233" sap2010:WorkflowViewState.IdRef="WriteCellX_12" Value="[DirectCast(&quot;=SUM(C&quot; &amp; startLine &amp; &quot;:C&quot; &amp; (NextAvailableRow - 1) &amp; &quot;)&quot;, Object)]">
+                              <If Condition="[invoice.Value.Keys.Any()]" sap:VirtualizedContainerService.HintSize="506,1295" sap2010:WorkflowViewState.IdRef="If_1">
+                                <If.Then>
+                                  <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="504,992" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="For Each TariffCode" sap:VirtualizedContainerService.HintSize="470,932" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[invoice.Value.Keys]">
+                                      <ui:ForEach.Body>
+                                        <ActivityAction x:TypeArguments="x:Object">
+                                          <ActivityAction.Argument>
+                                            <DelegateInArgument x:TypeArguments="x:Object" Name="TariffCode" />
+                                          </ActivityAction.Argument>
+                                          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="468,811" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                                            <sap:WorkflowViewStateService.ViewState>
+                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                              </scg:Dictionary>
+                                            </sap:WorkflowViewStateService.ViewState>
+                                            <ueab:WriteCellX Cell="[Excel.Sheet(&quot;Sheet1&quot;).Cell(&quot;A&quot;+NextAvailableRow.ToString)]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="434,191" sap2010:WorkflowViewState.IdRef="WriteCellX_7" Value="[TariffCode]" />
+                                            <ueab:WriteCellX sap2010:Annotation.AnnotationText="write product weight 0 for all products C Column" Cell="[Excel.Sheet(&quot;Sheet1&quot;).Cell(&quot;C&quot;+NextAvailableRow.ToString)]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="434,222" sap2010:WorkflowViewState.IdRef="WriteCellX_11" Value="[0]">
+                                              <sap:WorkflowViewStateService.ViewState>
+                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                                </scg:Dictionary>
+                                              </sap:WorkflowViewStateService.ViewState>
+                                            </ueab:WriteCellX>
+                                            <ueab:WriteCellX sap2010:Annotation.AnnotationText="write product price D column&#xA;" AutoIncrementRow="True" Cell="[Excel.Sheet(&quot;Sheet1&quot;).Cell(&quot;D&quot;+NextAvailableRow.ToString)]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="434,233" sap2010:WorkflowViewState.IdRef="WriteCellX_8" Value="[invoice.Value(CStr(TariffCode))]">
+                                              <sap:WorkflowViewStateService.ViewState>
+                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                                </scg:Dictionary>
+                                              </sap:WorkflowViewStateService.ViewState>
+                                            </ueab:WriteCellX>
+                                            <Assign sap:VirtualizedContainerService.HintSize="434,105" sap2010:WorkflowViewState.IdRef="Assign_3">
+                                              <Assign.To>
+                                                <OutArgument x:TypeArguments="x:Int32">[NextAvailableRow]</OutArgument>
+                                              </Assign.To>
+                                              <Assign.Value>
+                                                <InArgument x:TypeArguments="x:Int32">[NextAvailableRow + 1]</InArgument>
+                                              </Assign.Value>
+                                            </Assign>
+                                          </Sequence>
+                                        </ActivityAction>
+                                      </ui:ForEach.Body>
+                                    </ui:ForEach>
+                                  </Sequence>
+                                </If.Then>
+                                <If.Else>
+                                  <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="504,165" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <Assign sap:VirtualizedContainerService.HintSize="470,105" sap2010:WorkflowViewState.IdRef="Assign_7">
+                                      <Assign.To>
+                                        <OutArgument x:TypeArguments="x:Int32">[NextAvailableRow]</OutArgument>
+                                      </Assign.To>
+                                      <Assign.Value>
+                                        <InArgument x:TypeArguments="x:Int32">[NextAvailableRow + 1]</InArgument>
+                                      </Assign.Value>
+                                    </Assign>
+                                  </Sequence>
+                                </If.Else>
+                              </If>
+                              <ueab:WriteCellX Cell="[Excel.Sheet(&quot;Sheet1&quot;).Cell(&quot;B&quot;+NextAvailableRow.ToString)]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="506,191" sap2010:WorkflowViewState.IdRef="WriteCellX_13" Value="[&quot;Totals&quot;]" />
+                              <ueab:WriteCellX sap2010:Annotation.AnnotationText="write formula that calculate total weight of invoice &#xA;" Cell="[Excel.Sheet(&quot;Sheet1&quot;).Cell(&quot;C&quot;+NextAvailableRow.ToString)]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="506,233" sap2010:WorkflowViewState.IdRef="WriteCellX_12" Value="[DirectCast(&quot;=SUM(C&quot; &amp; startLine &amp; &quot;:C&quot; &amp; (NextAvailableRow - 1) &amp; &quot;)&quot;, Object)]">
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                     <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
                               </ueab:WriteCellX>
-                              <ueab:WriteCellX sap2010:Annotation.AnnotationText="write formula that calculate total price of invoice" Cell="[Excel.Sheet(&quot;Sheet1&quot;).Cell(&quot;D&quot;+NextAvailableRow.ToString)]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="470,222" sap2010:WorkflowViewState.IdRef="WriteCellX_14" Value="[DirectCast(&quot;=SUM(D&quot; &amp; startLine &amp; &quot;:D&quot; &amp; (NextAvailableRow - 1) &amp; &quot;)&quot;, Object)]">
+                              <ueab:WriteCellX sap2010:Annotation.AnnotationText="write formula that calculate total price of invoice" Cell="[Excel.Sheet(&quot;Sheet1&quot;).Cell(&quot;D&quot;+NextAvailableRow.ToString)]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="506,222" sap2010:WorkflowViewState.IdRef="WriteCellX_14" Value="[DirectCast(&quot;=SUM(D&quot; &amp; startLine &amp; &quot;:D&quot; &amp; (NextAvailableRow - 1) &amp; &quot;)&quot;, Object)]">
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                     <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
                               </ueab:WriteCellX>
-                              <Assign sap:VirtualizedContainerService.HintSize="470,105" sap2010:WorkflowViewState.IdRef="Assign_4">
+                              <Assign sap:VirtualizedContainerService.HintSize="506,114" sap2010:WorkflowViewState.IdRef="Assign_4">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="x:Int32">[NextAvailableRow]</OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="x:Int32">[NextAvailableRow + 1]</InArgument>
+                                </Assign.Value>
+                              </Assign>
+                              <ueab:WriteCellX sap2010:Annotation.AnnotationText="actual weight cell" Cell="[Excel.Sheet(&quot;Sheet1&quot;).Cell(&quot;B&quot;+NextAvailableRow.ToString)]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="506,222" sap2010:WorkflowViewState.IdRef="WriteCellX_16" Value="[&quot;actual total net weight&quot;]">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                              </ueab:WriteCellX>
+                              <ueab:WriteCellX sap2010:Annotation.AnnotationText="write acctual total net weight of invoice&#xA;it's for ability to chack if weight calculated correctlly after weights values added for each tariff code" Cell="[Excel.Sheet(&quot;Sheet1&quot;).Cell(&quot;C&quot;+NextAvailableRow.ToString)]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="506,248" sap2010:WorkflowViewState.IdRef="WriteCellX_15" Value="[in_AdditionalInvoiceData(invoice.Key + &quot;_total_net_weight&quot;)]">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                              </ueab:WriteCellX>
+                              <Assign sap:VirtualizedContainerService.HintSize="506,105" sap2010:WorkflowViewState.IdRef="Assign_6">
                                 <Assign.To>
                                   <OutArgument x:TypeArguments="x:Int32">[NextAvailableRow]</OutArgument>
                                 </Assign.To>
